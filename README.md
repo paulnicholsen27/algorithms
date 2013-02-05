@@ -1,4 +1,6 @@
 algorithms
 ==========
 
-Practicing with some algorithms.  # Simple algorithms created for practice
+Practicing with some algorithms. 
+
+Most of this work, for now at least, comes from the Udacity algorithms course.  
