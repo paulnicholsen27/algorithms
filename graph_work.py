@@ -15,22 +15,36 @@ def make_graph(node_list):
 
 
 test_nodes = [('a', 'g'), ('a', 'd'), ('b', 'f'), ('c', 'g'), 
-			  ('g', 'd'), ('f', 'e'), ('e', 'h')]
+			  ('g', 'd'), ('f', 'e'), ('e', 'h'), ('d', 'i'),
+			  ('i', 'j'), ('j', 'c'), ('d', 'f')]
 
 G = make_graph(test_nodes)
 
 def breadth_first_path(G, v1, v2):
-	distance_from_start = {}
+	'''takes as input a graph and two nodes,
+	returns shortest path between nodes'''
+	path_from_start = {}
 	open_list = [v1]
-	distance_from_start[v1] = 0
+	path_from_start[v1] = [v1]
 	while len(open_list) > 0:
 		current = open_list.pop(0)
 		for neighbor in G[current].keys():
-			if neighbor not in distance_from_start:
-				distance_from_start[neighbor] = distance_from_start[current] + 1
+			if neighbor not in path_from_start:
+				path_from_start[neighbor] = path_from_start[current] + [neighbor]
 				if neighbor == v2:
-					return distance_from_start[neighbor]
+					return path_from_start[neighbor]
 				open_list.append(neighbor)
-	return False
+	return False, path_from_start,
 
-print breadth_first_path(G, 'a', 'c')
+def centrality(G, v):
+	'''takes as input a graph and a node,
+	returns average shortest path to all other
+	nodes in the graph'''
+	number_of_nodes = len(G)
+	shortest_paths = breadth_first_path(G, v, '')[1] #finds all shortest paths by using non-existant v2
+	return sum(len(val)-1 for val in shortest_paths.values()) / (len(shortest_paths) - 1.0) #subtract 1 for current node
+
+print centrality(G, 'a')
+
+
+
