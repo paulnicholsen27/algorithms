@@ -11,7 +11,8 @@ def mergesort(lst):
 def merge(left, right):
     '''Subroutine of mergesort to sort split lists.  Also returns number
     of split inversions (i.e., each occurence of a number from the sorted second
-    half of the list appearing before a number from the sorted first half)'''
+    half of the list appearing in the unsorted list before a number from the 
+    sorted first half)'''
     i, j = 0, 0
     splits = 0
     result = []
